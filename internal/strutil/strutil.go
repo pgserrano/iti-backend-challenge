@@ -1,0 +1,5 @@
+package strutil
+
+func checkLength(){
+
+}
