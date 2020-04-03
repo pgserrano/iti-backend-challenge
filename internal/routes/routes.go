@@ -18,7 +18,7 @@ func InitRoutes(){
 
 	password := route.Group("/passwords")
 		validations := password.Group("/validations")
-			validations.POST("isValidPassword", isValidPassword)
+			validations.POST("handlePasswordValidation", handlePasswordValidation)
 
 
 
@@ -26,8 +26,10 @@ func InitRoutes(){
 
 }
 
-func isValidPassword(c *gin.Context){
-	passwd := "abc"
-	isValid := password.IsValidPassword(passwd)
+func handlePasswordValidation(c *gin.Context){
+	buf := make([]byte, 1024)
+	num, _ := c.Request.Body.Read(buf)
+	passwd := string(buf[0:num])
+	isValid := password.IsValid(passwd)
 	c.String(200, strconv.FormatBool(isValid))
 }
