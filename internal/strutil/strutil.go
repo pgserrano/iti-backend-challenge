@@ -1,9 +1,11 @@
 package strutil
 
 import (
-	"strings"
+	"regexp"
 	"unicode"
 )
+
+
 
 func CheckLength(str string, minLength int) bool {
 
@@ -14,8 +16,8 @@ func CheckLength(str string, minLength int) bool {
 
 func ContaisDigit(str string) bool{
 
-	containsDigit := strings.ContainsAny(str, "0123456789")
-	return containsDigit
+	match, _ := regexp.MatchString("\\d", str)
+	return match
 
 }
 
@@ -41,13 +43,8 @@ func ContaisLowerCase(str string) bool {
 	return false
 }
 
-func SpecialCharacter(str string) bool {
+func ContainsSpecialCharacter(str string) bool {
 
-	for _, char := range str {
-		if unicode.IsSymbol(char) {
-			return true
-		}
-	}
-
-	return false
+	match, _ := regexp.MatchString("\\W", str)
+	return match
 }
