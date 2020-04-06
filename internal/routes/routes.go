@@ -6,7 +6,6 @@ import (
 	"github.com/pgserrano/iti-backend-challenge/internal/password"
 	"github.com/pgserrano/iti-backend-challenge/internal/request"
 	"net/http"
-	"strconv"
 )
 
 func InitRoutes(){
