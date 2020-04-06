@@ -14,7 +14,7 @@ func CheckLength(str string, minLength int) bool {
 	return isLengthOk
 }
 
-func ContaisDigit(str string) bool{
+func ContainsDigit(str string) bool{
 
 	match, _ := regexp.MatchString("\\d", str)
 	return match
@@ -32,7 +32,7 @@ func ContainsUpperCase(str string) bool {
 	return false
 }
 
-func ContaisLowerCase(str string) bool {
+func ContainsLowerCase(str string) bool {
 
 	for _, char := range str {
 		if unicode.IsLetter(char) && unicode.IsLower(char) {

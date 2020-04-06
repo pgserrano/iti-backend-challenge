@@ -1,7 +1,7 @@
 package password
 
 import (
-	"github.com/pgserrano/iti-backend-challenge/internal/strutil"
+	"github.com/pgserrano/iti-backend-challenge/pkg/strutil"
 )
 
 
@@ -10,8 +10,8 @@ import (
 func IsValid(password string) bool {
 
 	isLengthOk := strutil.CheckLength(password, 9)
-	contaisDigit := strutil.ContaisDigit(password)
-	contaisLowerCase := strutil.ContaisLowerCase(password)
+	contaisDigit := strutil.ContainsDigit(password)
+	contaisLowerCase := strutil.ContainsLowerCase(password)
 	containsUpperCase := strutil.ContainsUpperCase(password)
 	containsSpecialChar := strutil.ContainsSpecialCharacter(password)
 
