@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/pgserrano/iti-backend-challenge/configs/enviroment"
 	"github.com/pgserrano/iti-backend-challenge/internal/password"
+	"github.com/pgserrano/iti-backend-challenge/internal/request"
 	"net/http"
 )
 
@@ -18,15 +19,14 @@ func SetupRouter() *gin.Engine{
 
 	users := router.Group("/users")
 		password := users.Group("/passwords")
-			validations := password.Group("/validations")
-				validations.POST("isValid", handlerPasswordValidation)
+			password.POST("/validate", handlerPasswordValidation)
+
 
 	return router
 }
 
 func handlerPasswordValidation(c *gin.Context){
-	buf := make([]byte, 1024)
-	body, _ := c.Request.Body.Read(buf)
-	passwd := string(buf[0:body])
-	c.String(http.StatusOK, password.IsValid(passwd))
+	body := request.ParserBody(c.Request.Body)
+	isValid := password.IsValid(body)
+	c.String(http.StatusOK, strconv.FormatBool(isValid))
 }
