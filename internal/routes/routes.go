@@ -5,7 +5,6 @@ import (
 	"github.com/pgserrano/iti-backend-challenge/configs/enviroment"
 	"github.com/pgserrano/iti-backend-challenge/internal/password"
 	"net/http"
-	"strconv"
 )
 
 func InitRoutes(){
@@ -29,6 +28,5 @@ func handlerPasswordValidation(c *gin.Context){
 	buf := make([]byte, 1024)
 	body, _ := c.Request.Body.Read(buf)
 	passwd := string(buf[0:body])
-	isValid := password.IsValid(passwd)
-	c.String(http.StatusOK, strconv.FormatBool(isValid))
+	c.String(http.StatusOK, password.IsValid(passwd))
 }
