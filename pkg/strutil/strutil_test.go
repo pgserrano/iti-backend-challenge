@@ -5,6 +5,9 @@ import (
 	"testing"
 )
 
+
+// Esse teste analisa uma coleção de strings válidas e outra inválidas
+// Para validar se a String possui ou não determinado tamanho
 func TestCheckLength(t *testing.T) {
 
 	baseLength := 9
@@ -26,6 +29,9 @@ func TestCheckLength(t *testing.T) {
 	fmt.Println("CheckLength Test OK")
 }
 
+
+// Esse teste analisa uma coleção de strings válidas e outra inválidas
+// Para validar se a String possui ou não digitos
 func TestContainsDigit(t *testing.T) {
 
 	okCases := []string{"AbTp9!foo", "A1", "1ABC4", "1" }
@@ -45,6 +51,8 @@ func TestContainsDigit(t *testing.T) {
 	fmt.Println("ContainsDigit Test OK")
 }
 
+// Esse teste analisa uma coleção de strings válidas e outra inválidas
+// Para validar se a String possui ou não algum caractere maisuculo
 func  TestContainsUpperCase(t *testing.T) {
 
 	okCases := []string{"AbTp9!foo", "A1", "1ABC4", "A" }
@@ -61,9 +69,11 @@ func  TestContainsUpperCase(t *testing.T) {
 		}
 	}
 
-	fmt.Println("ContainsUpperCase Test OK")}
+	fmt.Println("ContainsUpperCase Test OK")
+}
 
-
+// Esse teste analisa uma coleção de strings válidas e outra inválidas
+// Para validar se a String possui ou não algum caractere minusculo
 func TestContainsLowerCase(t *testing.T) {
 
 	okCases := []string{"AbTp9!foo", "A1a", "1abC4", "a1@" }
@@ -83,6 +93,8 @@ func TestContainsLowerCase(t *testing.T) {
 	fmt.Println("ContainsLowerCase Test OK")
 }
 
+// Esse teste analisa uma coleção de strings válidas e outra inválidas
+// Para validar se a String possui ou não algum caractere especial
 func TestContainsSpecialCharacter(t *testing.T) {
 
 	okCases := []string{"AbTp9!foo", "A!", "1ABC4@#", "@" }

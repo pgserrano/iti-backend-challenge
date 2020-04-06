@@ -6,7 +6,7 @@ import (
 )
 
 
-
+// CheckLength analisa se uma String tem determinado tamanho
 func CheckLength(str string, minLength int) bool {
 
 	isLengthOk := len(str) >= minLength
@@ -14,6 +14,8 @@ func CheckLength(str string, minLength int) bool {
 	return isLengthOk
 }
 
+// ContainsDigit analisa se uma String possui algum digito
+// Utilizando regex para fazer essa análise
 func ContainsDigit(str string) bool{
 
 	match, _ := regexp.MatchString("\\d", str)
@@ -21,6 +23,8 @@ func ContainsDigit(str string) bool{
 
 }
 
+// ContainsUpperCase analisa se uma String possui algum caractere maiusculo
+// Utilizando runes para fazer essa análise
 func ContainsUpperCase(str string) bool {
 
 	for _, char := range str {
@@ -32,6 +36,8 @@ func ContainsUpperCase(str string) bool {
 	return false
 }
 
+// ContainsLowerCase analisa se uma String possui algum caractere minusculo
+// Utilizando runes para fazer essa análise
 func ContainsLowerCase(str string) bool {
 
 	for _, char := range str {
@@ -43,6 +49,8 @@ func ContainsLowerCase(str string) bool {
 	return false
 }
 
+// ContainsSpecialCharacter analisa se uma String possui algum caractere especial
+// Utilizando regex para fazer essa análise
 func ContainsSpecialCharacter(str string) bool {
 
 	match, _ := regexp.MatchString("\\W", str)
