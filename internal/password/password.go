@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/pgserrano/iti-backend-challenge/pkg/strutil"
+	"strconv"
 )
 
 type PasswordResponse struct {
@@ -19,7 +20,7 @@ func IsValid(password string) string {
 	minimunLength := 9
 	isLengthOk := strutil.CheckLength(password, minimunLength)
 	if !isLengthOk{
-		err := "Quantidade de caracteres menor do que o limite mínimo de " + string(minimunLength)
+		err := "Quantidade de caracteres menor do que o limite mínimo de " + strconv.Itoa(minimunLength)
 		errs = append(errs, err)
 	}
 
