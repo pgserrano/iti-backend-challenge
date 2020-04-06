@@ -4,25 +4,31 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/pgserrano/iti-backend-challenge/configs/enviroment"
 	"github.com/pgserrano/iti-backend-challenge/internal/password"
+	"net/http"
 	"strconv"
 )
 
 func InitRoutes(){
-
-	route := gin.Default()
-
-	password := route.Group("/passwords")
-		validations := password.Group("/validations")
-			validations.POST("handlePasswordValidation", handlePasswordValidation)
-
-	route.Run(enviroment.GetSystemPort())
-
+	router := SetupRouter()
+	router.Run(enviroment.GetSystemPort())
 }
 
-func handlePasswordValidation(c *gin.Context){
+func SetupRouter() *gin.Engine{
+
+	router := gin.Default()
+
+	users := router.Group("/users")
+		password := users.Group("/passwords")
+			validations := password.Group("/validations")
+				validations.POST("isValid", handlerPasswordValidation)
+
+	return router
+}
+
+func handlerPasswordValidation(c *gin.Context){
 	buf := make([]byte, 1024)
-	num, _ := c.Request.Body.Read(buf)
-	passwd := string(buf[0:num])
+	body, _ := c.Request.Body.Read(buf)
+	passwd := string(buf[0:body])
 	isValid := password.IsValid(passwd)
-	c.String(200, strconv.FormatBool(isValid))
+	c.String(http.StatusOK, strconv.FormatBool(isValid))
 }
