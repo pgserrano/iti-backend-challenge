@@ -10,17 +10,10 @@ import (
 func InitRoutes(){
 
 	route := gin.Default()
-	route.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
 
 	password := route.Group("/passwords")
 		validations := password.Group("/validations")
 			validations.POST("handlePasswordValidation", handlePasswordValidation)
-
-
 
 	route.Run(enviroment.GetSystemPort())
 
