@@ -3,8 +3,8 @@
 # Solução
 Para solucionar o problema a aplicação foi quebrada em 3 partes: 
  
-- Infra: Rotas para validação das senhas passadas ( internal/routes/routes.go )
-- Negócio: Um arquivo para validações das regras de uma senha forte ( internal/password/password.go )
+- Infra: Rotas para validação das senhas passadas ( internal/routes/routes.go, internal/http/request.go, internal/http/response.go  )
+- Negócio: Um arquivo para validações das regras de uma senha forte ( internal/password/validator.go )
 - Componentes Uteis: Um arquivo para lógicas envolvendo strings ( pkg/strutil/strutil.go ). Que é candidato a ser exposto para outros projetos
  
 
