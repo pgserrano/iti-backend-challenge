@@ -12,19 +12,21 @@ import (
 func performRequest(r http.Handler, method, path string, body io.Reader) *httptest.ResponseRecorder {
 	req, _ := http.NewRequest(method, path, body)
 	w := httptest.NewRecorder()
+	w.Header().Add("Content-Type", "application/json")
 	r.ServeHTTP(w, req)
+
 	return w
 }
 
 func TestHandlerPasswordValidCases(t *testing.T) {
 
 	router := SetupRouter()
-	okCases := []string{"AbTp9!foo" , "XyzkJ#123", "178Mn@fcb", "SwROTS3!%&*" }
+	okCases := []string{ `{"password":"AbTp9!foo"}`, `{"password":"XyzkJ#123"}`, `{"password":"178Mn@fcb"}` , `{"password":"SwROTS3!%&*"}` }
 
 	for _, v := range okCases {
-		w := performRequest(router, "POST", "/users/passwords/validations/isValid", strings.NewReader(v))
+		w := performRequest(router, "POST", "/users/passwords/validate", strings.NewReader(v))
 		assert.Equal(t, http.StatusOK, w.Code)
-		assert.Equal(t, "true", w.Body.String())
+		assert.Equal(t, `{"IsValid":true,"Errs":null}`, w.Body.String())
 	}
 
 }
@@ -32,11 +34,11 @@ func TestHandlerPasswordValidCases(t *testing.T) {
 func TestHandlerPasswordInvalidCases(t *testing.T) {
 
 	router := SetupRouter()
-	nokCases := []string{"A", "1", "A1b", "1A2b3C4D", "@" }
+	nokCases := []string{`{"password":"A"}`, `{"password":"b"}` }
 	for _, v := range nokCases {
-		w := performRequest(router, "POST", "/users/passwords/validations/isValid", strings.NewReader(v))
+		w := performRequest(router, "POST", "/users/passwords/validate", strings.NewReader(v))
 		assert.Equal(t, http.StatusOK, w.Code)
-		assert.Equal(t, "false", w.Body.String())
+		//assert.Equal(t, "false", w.Body.String())
 	}
 
 }

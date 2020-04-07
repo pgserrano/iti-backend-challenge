@@ -9,6 +9,6 @@ import (
 func main() {
 
 	fmt.Println("Starting Service Version: " + version.Version)
-	routes.InitRoutes()
+	routes.StartServer()
 
 }
