@@ -8,7 +8,7 @@ Para solucionar o problema a aplicação foi quebrada em 3 partes:
 - Componentes Uteis: Um arquivo para lógicas envolvendo strings ( pkg/strutil/strutil.go ). Que é candidato a ser exposto para outros projetos
  
 
-##Execução
+## Execução
 A aplicação pode ser executada de duas maneiras
 1. Local
     - Necessária instalação do Golang 1.13
@@ -19,13 +19,13 @@ A aplicação pode ser executada de duas maneiras
         -  docker run --net host iti-challenge
 
 
-##Requisições
+## Requisições
 A aplicação aceita apenas um POST e o body de um json com a senha a ser validada. Exemplo: 
 ```
 curl -d '{"password":"AbTp9!foo"}' -H "Content-Type: application/json" -X POST http://localhost:3000/users/passwords/validate
 ```
  
-##Respostas 
+## Respostas 
 O sistema possui 3 respostas possíveis. 
 1. 200 OK {"IsValid":true,"Errs":null}
 2. 200 OK {"IsValid":false,"Errs":<Array com lista de erros da senha>}
