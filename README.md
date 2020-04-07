@@ -22,7 +22,7 @@ A aplicação pode ser executada de duas maneiras
 
 
 ##Requisições
-A aplicação aceita apenas um POST e o body com a senha a ser validada. Exemplo: 
+A aplicação aceita apenas um POST e o body de um json com a senha a ser validada. Exemplo: 
 ```
 curl -d '{"password":"AbTp9!foo"}'  -H "Content-Type: application/json" -X POST http://localhost:3000/users/passwords/validations/isValid
 ```
