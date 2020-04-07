@@ -1,19 +1,22 @@
 package http
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
+	"github.com/gin-gonic/gin"
+	"io/ioutil"
 )
 
-func ParserBody(body io.Reader) (string, error){
 
-	buf := make([]byte, 1024)
-	content, err := body.Read(buf)
-	if err != nil {
+func ParserBody(context *gin.Context) (string, error) {
+
+	content, err := ioutil.ReadAll(context.Request.Body)
+	isValid := json.Valid(content)
+	if err != nil  || !isValid{
 		fmt.Println(err)
 		return "", errors.New("Error on Parser Body")
 	}
-	return string(buf[0:content]), nil
+	return string(content), nil
 
 }

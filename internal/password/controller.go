@@ -1,6 +1,7 @@
 package password
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/pgserrano/iti-backend-challenge/internal/http"
 )
@@ -16,10 +17,12 @@ func CreateRouters(router *gin.Engine) {
 
 func handlerPasswordValidation(c *gin.Context){
 
-	body, err := http.ParserBody(c.Request.Body)
+	body, err := http.ParserBody(c)
+
 	if err != nil {
+		fmt.Println(err)
 		http.HandleBadRequest(c)
-	} else {
+	}else {
 		http.HandleStatusOK(c, IsValid(body))
 	}
 

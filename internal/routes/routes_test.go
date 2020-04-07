@@ -42,6 +42,3 @@ func TestHandlerPasswordInvalidCases(t *testing.T) {
 	}
 
 }
-
-
-//TODO TestHandlerPasswordBadRequest

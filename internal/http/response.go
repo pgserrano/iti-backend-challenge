@@ -7,7 +7,7 @@ import (
 
 func HandleBadRequest(context *gin.Context) {
 
-	context.String(http.StatusBadRequest, "Body com formato inválido")
+	context.String(http.StatusBadRequest, "Malformed Body")
 }
 
 
