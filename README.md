@@ -9,6 +9,7 @@ Para solucionar o problema a aplicação foi quebrada em 3 partes:
  
 
 # Utilização
+
 ##Execução
 A aplicação pode ser executada de duas maneiras
 1. Local
@@ -18,10 +19,12 @@ A aplicação pode ser executada de duas maneiras
     - A aplicação possui um Dockerfile e sua execução pode ser realizada utilizando os seguintes comandos
         - docker build -f Dockerfile -t iti-challenge .
         -  docker run --net host iti-challenge
+
+
 ##Requisições
 A aplicação aceita apenas um POST e o body com a senha a ser validada. Exemplo: 
 ```
-curl -d 'AbTp9!foo' -X POST http://localhost:3000/users/passwords/validations/isValid
+curl -d '{"password":"AbTp9!foo"}'  -H "Content-Type: application/json" -X POST http://localhost:3000/users/passwords/validations/isValid
 ```
  
 ## Testes
@@ -36,7 +39,7 @@ go test
 ```
 
 Os testes unitários da aplicação são: 
-- internal/password/password_test.go
+- internal/password/validator_test.go
 - pkg/strutil/strutil_test.go
 
 Os testes de integração são:
