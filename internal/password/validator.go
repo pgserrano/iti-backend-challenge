@@ -2,15 +2,9 @@ package password
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/pgserrano/iti-backend-challenge/pkg/strutil"
 	"strconv"
 )
-
-type PasswordResponse struct {
-	IsValid bool
-	Errs []string
-}
 
 type PasswordRequest struct {
 	password string
@@ -67,26 +61,3 @@ func extractPassword(password string) string {
 }
 
 
-func createResponse (errs []string ) string {
-
-	var response PasswordResponse
-	if errs != nil {
-		response = PasswordResponse{
-					IsValid: false,
-					Errs: errs,
-		}
-	}else {
-		response = PasswordResponse{
-			IsValid: true,
-			Errs: nil,
-		}
-	}
-
-	responseJson , errJson := json.Marshal(response)
-	if(errJson != nil){
-		fmt.Println(errJson)
-	}
-
-	return string(responseJson)
-
-}
