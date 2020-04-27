@@ -1,21 +1,18 @@
 package password
 
 import (
-	"encoding/json"
 	"github.com/pgserrano/iti-backend-challenge/pkg/strutil"
 	"strconv"
 )
 
-type PasswordRequest struct {
-	password string
-}
+
 
 var errs []string
 
 //TODO Criar uma chain de validações. Como fazer ?  Elixir/F#-like
 func IsValid(password string) string {
 
-	passwd := extractPassword(password)
+	passwd := ExtractPassword(password)
 
 	minimunLength := 9
 	checkConstraint(strutil.CheckLength(passwd, minimunLength),"Quantidade de caracteres menor do que o limite mínimo de " + strconv.Itoa(minimunLength))
@@ -41,13 +38,5 @@ func checkConstraint(constraint bool, msg string) {
 	}
 }
 
-func extractPassword(password string) string {
 
-	var contentMap map[string]string
-	if err := json.Unmarshal([]byte(password), &contentMap); err != nil {
-		panic(err)
-	}
-	strPassword := contentMap["password"]
-	return strPassword
-}
 
