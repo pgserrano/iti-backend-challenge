@@ -10,44 +10,35 @@ type PasswordRequest struct {
 	password string
 }
 
+var errs []string
+
 //TODO Criar uma chain de validações. Como fazer ?  Elixir/F#-like
 func IsValid(password string) string {
 
 	passwd := extractPassword(password)
-	var errs []string
 
 	minimunLength := 9
-	isLengthOk := strutil.CheckLength(passwd, minimunLength)
-	if !isLengthOk{
-		err := "Quantidade de caracteres menor do que o limite mínimo de " + strconv.Itoa(minimunLength)
-		errs = append(errs, err)
-	}
+	checkConstraint(strutil.CheckLength(passwd, minimunLength),"Quantidade de caracteres menor do que o limite mínimo de " + strconv.Itoa(minimunLength))
 
-	contaisDigit := strutil.ContainsDigit(passwd)
-	if !contaisDigit{
-		err := "A senha não possui nenhum digito"
-		errs = append(errs, err)
-	}
+	checkConstraint(strutil.ContainsDigit(passwd),  "A senha não possui nenhum digito")
 
-	contaisLowerCase := strutil.ContainsLowerCase(passwd)
-	if !contaisLowerCase{
-		err := "A senha não possui nenhum caractere minusculo"
-		errs = append(errs, err)
-	}
+	checkConstraint(strutil.ContainsLowerCase(passwd),  "A senha não possui nenhum caractere minusculo")
 
-	containsUpperCase := strutil.ContainsUpperCase(passwd)
-	if !containsUpperCase{
-		err := "A senha não possui nenhum caractere maiusculo"
-		errs = append(errs, err)
-	}
+	checkConstraint(strutil.ContainsUpperCase(passwd),  "A senha não possui nenhum caractere maiusculo")
 
-	containsSpecialChar := strutil.ContainsSpecialCharacter(passwd)
-	if !containsSpecialChar{
-		err := "A senha não possui nenhum caractere especial"
-		errs = append(errs, err)
-	}
+	checkConstraint(strutil.ContainsSpecialCharacter(passwd),  "A senha não possui nenhum caractere especial")
 
-	return createResponse(errs)
+	response := createResponse(errs)
+	errs = nil
+
+	return response
+}
+
+func checkConstraint(constraint bool, msg string) {
+
+	if !constraint {
+		errs = append(errs, msg)
+	}
 }
 
 func extractPassword(password string) string {
@@ -59,5 +50,4 @@ func extractPassword(password string) string {
 	strPassword := contentMap["password"]
 	return strPassword
 }
-
 
